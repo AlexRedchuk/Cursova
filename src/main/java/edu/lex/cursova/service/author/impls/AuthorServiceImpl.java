@@ -17,7 +17,6 @@ public class AuthorServiceImpl implements IAuthorService {
     @Autowired
     AuthorDaoImplFake dao;
 
-
     @PostConstruct
     void init(){
         List<Author> list = dao.getAll();
