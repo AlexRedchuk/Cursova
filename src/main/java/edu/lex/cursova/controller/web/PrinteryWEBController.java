@@ -24,6 +24,6 @@ public class PrinteryWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("printeries", service.getAll());
-        return "printeryList";
+        return "redirect:/web/printery/list";
     }
 }

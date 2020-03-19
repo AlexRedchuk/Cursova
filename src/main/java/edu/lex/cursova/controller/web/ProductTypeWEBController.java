@@ -24,6 +24,6 @@ public class ProductTypeWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("productTypes", service.getAll());
-        return "productTypeList";
+        return "redirect:/web/productType/list";
     }
 }

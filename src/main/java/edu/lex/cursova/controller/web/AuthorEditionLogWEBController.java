@@ -24,6 +24,6 @@ public class AuthorEditionLogWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("authorEditionLogs", service.getAll());
-        return "authorEditionLogList";
+        return "redirect:/web/authorEditionLog/list";
     }
 }

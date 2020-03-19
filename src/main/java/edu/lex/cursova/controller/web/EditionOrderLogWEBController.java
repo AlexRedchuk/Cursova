@@ -24,6 +24,6 @@ public class EditionOrderLogWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("editionOrderLogs", service.getAll());
-        return "editionOrderLogList";
+        return "redirect:/web/editionOrderLog/list";
     }
 }

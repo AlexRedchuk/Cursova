@@ -16,14 +16,10 @@ public class AuthorServiceImpl implements IAuthorService {
     @Autowired
     AuthorDaoImplFake dao;
 
-    @Autowired
-    AuthorRepository repository;
-
     @PostConstruct
     void init(){
         List<Author> list = dao.getAll();
 
-        repository.saveAll(list);
     }
 
     @Override
@@ -38,7 +34,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public List<Author> getAll() {
-        return repository.findAll();
+        return dao.getAll();
     }
 
     @Override
@@ -48,7 +44,6 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author delete(String id) {
-        repository.deleteById(id);
-        return repository.findById(id).orElse(null);
+       return null;
     }
 }

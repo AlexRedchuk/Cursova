@@ -24,6 +24,6 @@ public class CustomerWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("customers", service.getAll());
-        return "customerList";
+        return "redirect:/web/customer/list";
     }
 }

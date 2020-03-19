@@ -24,6 +24,6 @@ public class AuthorWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("authors", service.getAll());
-        return "authorList";
+        return "redirect:/web/author/list";
     }
 }

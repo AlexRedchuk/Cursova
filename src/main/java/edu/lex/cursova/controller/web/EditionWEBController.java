@@ -24,6 +24,6 @@ public class EditionWEBController {
                   @PathVariable("id") String id) {
         service.delete(id);
         model.addAttribute("editions", service.getAll());
-        return "editionList";
+        return "redirect:/web/edition/list";
     }
 }
