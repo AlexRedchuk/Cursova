@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.security.acl.Group;
 import java.util.List;
 
 @Service
@@ -20,7 +21,6 @@ public class AuthorServiceImpl implements IAuthorService {
     @PostConstruct
     void init(){
         List<Author> list = dao.getAll();
-
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author get(String id) {
-        return null;
+        return getAll().stream().filter(item -> item.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
@@ -45,6 +45,9 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author delete(String id) {
-        return null;
+        //TODO implement method
+        Author author = this.get(id);
+        dao.getAll().remove(author);
+        return author;
     }
 }

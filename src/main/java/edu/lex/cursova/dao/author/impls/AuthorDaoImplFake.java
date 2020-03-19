@@ -16,7 +16,8 @@ public class AuthorDaoImplFake implements IAuthorDao {
 
     @Override
     public Author save(Author author) {
-        return null;
+        dataSet.getAuthors().add(author);
+        return author;
     }
 
     @Override
