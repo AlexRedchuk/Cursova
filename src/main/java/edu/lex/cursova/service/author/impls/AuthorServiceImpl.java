@@ -38,7 +38,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public List<Author> getAll() {
-        return dao.getAll();
+        return repository.findAll();
     }
 
     @Override
