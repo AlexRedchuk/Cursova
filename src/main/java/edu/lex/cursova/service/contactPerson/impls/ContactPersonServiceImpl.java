@@ -1,7 +1,6 @@
 package edu.lex.cursova.service.contactPerson.impls;
 
-import edu.lex.cursova.dao.contactPerson.impls.ContactPersonDaoImplFake;
-import edu.lex.cursova.dao.repository.ContactPersonRepository;
+import edu.lex.cursova.repository.ContactPersonRepository;
 import edu.lex.cursova.model.ContactPerson;
 import edu.lex.cursova.service.contactPerson.interfaces.IContactPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,12 @@ import java.util.List;
 
 @Service
 public class ContactPersonServiceImpl implements IContactPersonService {
-
-    @Autowired
-    ContactPersonDaoImplFake dao;
-
     @Autowired
     ContactPersonRepository repository;
 
     @PostConstruct
     void init(){
-        List<ContactPerson> list = dao.getAll();
 
-        repository.saveAll(list);
     }
 
     @Override

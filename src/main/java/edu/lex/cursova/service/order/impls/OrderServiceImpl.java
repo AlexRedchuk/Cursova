@@ -1,7 +1,6 @@
 package edu.lex.cursova.service.order.impls;
 
-import edu.lex.cursova.dao.order.impls.OrderDaoImplFake;
-import edu.lex.cursova.dao.repository.OrderRepository;
+import edu.lex.cursova.repository.OrderRepository;
 import edu.lex.cursova.model.Order;
 import edu.lex.cursova.service.order.interfaces.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,12 @@ import java.util.List;
 
 @Controller
 public class OrderServiceImpl implements IOrderService {
-
-    @Autowired
-    OrderDaoImplFake dao;
-
     @Autowired
     OrderRepository repository;
 
     @PostConstruct
     void init(){
-        List<Order> list = dao.getAll();
 
-        repository.saveAll(list);
     }
 
     @Override

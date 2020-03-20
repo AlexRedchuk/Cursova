@@ -1,7 +1,6 @@
 package edu.lex.cursova.service.authorEditionLog.impls;
 
-import edu.lex.cursova.dao.authorEditionLog.impls.AuthorEditionLogDaoImplFake;
-import edu.lex.cursova.dao.repository.AuthorEditionLogRepository;
+import edu.lex.cursova.repository.AuthorEditionLogRepository;
 import edu.lex.cursova.model.AuthorEditionLog;
 import edu.lex.cursova.service.authorEditionLog.interfaces.IAuthorEditionLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +13,11 @@ import java.util.List;
 public class AuthorEditionLogServiceImpl implements IAuthorEditionLogService {
 
     @Autowired
-    AuthorEditionLogDaoImplFake dao;
-
-    @Autowired
     AuthorEditionLogRepository repository;
 
     @PostConstruct
     void init(){
-        List<AuthorEditionLog> list = dao.getAll();
 
-        repository.saveAll(list);
     }
 
     @Override

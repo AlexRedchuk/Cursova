@@ -1,7 +1,6 @@
 package edu.lex.cursova.service.edition.impls;
 
-import edu.lex.cursova.dao.edition.impls.EditionDaoImplFake;
-import edu.lex.cursova.dao.repository.EditionRepository;
+import edu.lex.cursova.repository.EditionRepository;
 import edu.lex.cursova.model.Edition;
 import edu.lex.cursova.service.edition.interfaces.IEditionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,12 @@ import java.util.List;
 
 @Service
 public class EditionServiceImpl implements IEditionService {
-
-    @Autowired
-    EditionDaoImplFake dao;
-
     @Autowired
     EditionRepository repository;
 
     @PostConstruct
     void init(){
-        List<Edition> list = dao.getAll();
 
-        repository.saveAll(list);
     }
 
     @Override

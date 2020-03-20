@@ -1,7 +1,8 @@
 package edu.lex.cursova.controller.api;
 
-import edu.lex.cursova.dao.orderProcess.impls.OrderProcessDaoImplFake;
+
 import edu.lex.cursova.model.OrderProcess;
+import edu.lex.cursova.service.orderProcess.impls.OrderProcessServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import java.util.List;
 public class OrderProcessAPIController  {
 
     @Autowired
-    OrderProcessDaoImplFake service;
+    OrderProcessServiceImpl service;
 
     @RequestMapping("/list")
     List<OrderProcess> getAll() {
