@@ -27,7 +27,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public Author edit(Author author) {
-        return null;
+        return repository.save(author);
     }
 
     @Override
