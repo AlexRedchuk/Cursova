@@ -21,12 +21,12 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order save(Order order) {
-        return null;
+        return repository.save(order);
     }
 
     @Override
     public Order get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order edit(Order order) {
-        return null;
+        return repository.save(order);
     }
 
     @Override

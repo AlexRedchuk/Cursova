@@ -1,11 +1,9 @@
 package edu.lex.cursova.controller.api;
 
-
 import edu.lex.cursova.model.OrderProcess;
 import edu.lex.cursova.service.orderProcess.impls.OrderProcessServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,23 @@ public class OrderProcessAPIController  {
     @Autowired
     OrderProcessServiceImpl service;
 
-    @RequestMapping("/list")
+    @RequestMapping("/get/list")
     List<OrderProcess> getAll() {
         return service.getAll();
+    }
+
+    @RequestMapping("get/{id}")
+    OrderProcess getById(@PathVariable("id") String id){
+        return service.get(id);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    OrderProcess create (@RequestBody OrderProcess orderProcess) {
+        return service.save(orderProcess);
+    }
+
+    @RequestMapping("/delete/{id}")
+    OrderProcess delete(@PathVariable("id") String id) {
+        return service.delete(id);
     }
 }

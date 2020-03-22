@@ -21,12 +21,12 @@ public class EditionServiceImpl implements IEditionService {
 
     @Override
     public Edition save(Edition edition) {
-        return null;
+        return repository.save(edition);
     }
 
     @Override
     public Edition get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EditionServiceImpl implements IEditionService {
 
     @Override
     public Edition edit(Edition edition) {
-        return null;
+        return repository.save(edition);
     }
 
     @Override

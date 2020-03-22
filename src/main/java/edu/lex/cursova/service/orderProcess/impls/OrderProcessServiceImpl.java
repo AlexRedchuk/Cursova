@@ -22,12 +22,12 @@ public class OrderProcessServiceImpl implements IOrderProcessService {
 
     @Override
     public OrderProcess save(OrderProcess orderProcess) {
-        return null;
+        return repository.save(orderProcess);
     }
 
     @Override
     public OrderProcess get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class OrderProcessServiceImpl implements IOrderProcessService {
 
     @Override
     public OrderProcess edit(OrderProcess orderProcess) {
-        return null;
+        return repository.save(orderProcess);
     }
 
     @Override

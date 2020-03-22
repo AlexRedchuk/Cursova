@@ -20,12 +20,12 @@ public class CustomerServiceImpl implements ICustomerService {
     }
     @Override
     public Customer save(Customer customer) {
-        return null;
+        return repository.save(customer);
     }
 
     @Override
     public Customer get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public Customer edit(Customer customer) {
-        return null;
+        return repository.save(customer);
     }
 
     @Override

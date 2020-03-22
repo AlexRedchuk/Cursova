@@ -21,12 +21,12 @@ public class PrinteryServiceImpl implements IPrinteryService {
 
     @Override
     public Printery save(Printery printery) {
-        return null;
+        return repository.save(printery);
     }
 
     @Override
     public Printery get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class PrinteryServiceImpl implements IPrinteryService {
 
     @Override
     public Printery edit(Printery printery) {
-        return null;
+        return repository.save(printery);
     }
 
     @Override

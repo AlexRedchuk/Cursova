@@ -21,12 +21,12 @@ public class ContactPersonServiceImpl implements IContactPersonService {
 
     @Override
     public ContactPerson save(ContactPerson contactPerson) {
-        return null;
+        return repository.save(contactPerson);
     }
 
     @Override
     public ContactPerson get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ContactPersonServiceImpl implements IContactPersonService {
 
     @Override
     public ContactPerson edit(ContactPerson contactPerson) {
-        return null;
+        return repository.save(contactPerson);
     }
 
     @Override

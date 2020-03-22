@@ -21,13 +21,13 @@ public class AuthorEditionLogServiceImpl implements IAuthorEditionLogService {
     }
 
     @Override
-    public AuthorEditionLog save(AuthorEditionLog orderProcess) {
-        return null;
+    public AuthorEditionLog save(AuthorEditionLog authorEditionLog) {
+        return repository.save(authorEditionLog);
     }
 
     @Override
     public AuthorEditionLog get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,8 +36,8 @@ public class AuthorEditionLogServiceImpl implements IAuthorEditionLogService {
     }
 
     @Override
-    public AuthorEditionLog edit(AuthorEditionLog orderProcess) {
-        return null;
+    public AuthorEditionLog edit(AuthorEditionLog authorEditionLog) {
+        return repository.save(authorEditionLog);
     }
 
     @Override

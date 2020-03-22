@@ -21,12 +21,12 @@ public class ProductTypeServiceImpl implements IProductTypeService {
 
     @Override
     public ProductType save(ProductType productType) {
-        return null;
+        return repository.save(productType);
     }
 
     @Override
     public ProductType get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ProductTypeServiceImpl implements IProductTypeService {
 
     @Override
     public ProductType edit(ProductType productType) {
-        return null;
+        return repository.save(productType);
     }
 
     @Override

@@ -21,12 +21,12 @@ public class EditionOrderLogServiceImpl implements IEditionOrderLogService {
 
     @Override
     public EditionOrderLog save(EditionOrderLog editionOrderLog) {
-        return null;
+        return repository.save(editionOrderLog);
     }
 
     @Override
     public EditionOrderLog get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EditionOrderLogServiceImpl implements IEditionOrderLogService {
 
     @Override
     public EditionOrderLog edit(EditionOrderLog editionOrderLog) {
-        return null;
+        return repository.save(editionOrderLog);
     }
 
     @Override

@@ -21,12 +21,12 @@ public class EditionDirectionServiceImpl implements IEditionDirectionService {
 
     @Override
     public EditionDirection save(EditionDirection editionDirection) {
-        return null;
+        return repository.save(editionDirection);
     }
 
     @Override
     public EditionDirection get(String id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class EditionDirectionServiceImpl implements IEditionDirectionService {
 
     @Override
     public EditionDirection edit(EditionDirection editionDirection) {
-        return null;
+        return repository.save(editionDirection);
     }
 
     @Override
