@@ -23,10 +23,11 @@
                 <td>${productType.name}</td>
                 <td>${productType.description}</td>
                 <td><a href="delete/${productType.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${productType.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>

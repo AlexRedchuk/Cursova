@@ -23,10 +23,11 @@
                 <td>${editionDirection.name}</td>
                 <td>${editionDirection.description}</td>
                 <td><a href="delete/${editionDirection.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${editionDirection.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>

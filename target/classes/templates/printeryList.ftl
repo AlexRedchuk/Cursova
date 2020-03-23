@@ -25,10 +25,11 @@
                 <td>${printery.address}</td>
                 <td>${printery.phoneNumber}</td>
                 <td><a href="delete/${printery.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${printery.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>

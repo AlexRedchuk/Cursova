@@ -25,10 +25,11 @@
                 <td>${contactPerson.phoneNumber}</td>
                 <td>${contactPerson.fax}</td>
                 <td><a href="delete/${contactPerson.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${contactPerson.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>
