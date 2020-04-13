@@ -25,10 +25,11 @@
                 <td>${authorEditionLog.author.fullName}</td>
                 <td>${authorEditionLog.additionalInformation}</td>
                 <td><a href="delete/${authorEditionLog.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${authorEditionLog.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>
