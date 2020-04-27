@@ -7,7 +7,9 @@
 </head>
 <body>
 <form name="group" action="" method="POST">
-    Author: <@spring.formSingleSelect "authorEditionLogForm.author", mavs, ""/>
+    Author: <@spring.formSingleSelect "authorEditionLogForm.author", authorsL, ""/>
+    <br>
+    Edition: <@spring.formSingleSelect "authorEditionLogForm.edition", editionsL, ""/>
     <br>
     Additional form:<@spring.formInput "authorEditionLogForm.additionalInformation", "", "text"/>
     <br>
