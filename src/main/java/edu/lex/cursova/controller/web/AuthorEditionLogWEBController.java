@@ -111,7 +111,7 @@ public class AuthorEditionLogWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorForm") AuthorEditionLogForm authorEditionLogForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorEditionLogForm") AuthorEditionLogForm authorEditionLogForm) {
         Author author = authorService.getAll().stream()
                 .filter(item -> item.getFullName().equals(authorEditionLogForm.getAuthor()) )
                 .findFirst().orElse(new Author());

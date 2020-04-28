@@ -23,10 +23,11 @@
                 <td>${editionOrderLog.edition.name}</td>
                 <td>${editionOrderLog.order.numberOfOrder}</td>
                 <td><a href="delete/${editionOrderLog.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${editionOrderLog.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>
