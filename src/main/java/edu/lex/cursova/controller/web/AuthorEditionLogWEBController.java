@@ -91,26 +91,40 @@ public class AuthorEditionLogWEBController {
         return "redirect:/web/authorEditionLog/list";
     }
 
-//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-//    String edit(Model model, @PathVariable("id") String id) {
-//        Author author = service.get(id);
-//        AuthorForm authorForm = new AuthorForm();
-//        authorForm.setFullName(author.getFullName());
-//        authorForm.setAddress(author.getAddress());
-//        authorForm.setPhoneNumber(author.getPhoneNumber());
-//        model.addAttribute("authorForm", authorForm);
-//        return "authorAdd";
-//    }
-//
-//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-//    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorForm") AuthorForm authorForm) {
-//        Author author = new Author();
-//        author.setId(id);
-//        author.setFullName(authorForm.getFullName());
-//        author.setAddress(authorForm.getAddress());
-//        author.setPhoneNumber(authorForm.getPhoneNumber());
-//        service.save(author);
-//        model.addAttribute("authors", service.getAll());
-//        return "redirect:/web/author/list";
-//    }
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    String edit(Model model, @PathVariable("id") String id) {
+        AuthorEditionLogForm authorEditionLogForm = new AuthorEditionLogForm();
+        AuthorEditionLog authorEditionLog = service.get(id);
+        authorEditionLogForm.setAuthor(authorEditionLog.getAuthor().getFullName());
+        authorEditionLogForm.setEdition(authorEditionLog.getEdition().getName());
+        authorEditionLogForm.setAdditionalInformation(authorEditionLog.getAdditionalInformation());
+        List<String> authorList = authorService.getAll().stream()
+                .map(Author::getFullName).collect(Collectors.toList());
+
+        List<String> editionList = editionService.getAll().stream()
+                .map(Edition::getName).collect(Collectors.toList());
+
+        model.addAttribute("authorsL", authorList);
+        model.addAttribute("editionsL", editionList);
+        model.addAttribute("authorEditionLogForm", authorEditionLogForm);
+        return "authorEditionLogAdd";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorForm") AuthorEditionLogForm authorEditionLogForm) {
+        Author author = authorService.getAll().stream()
+                .filter(item -> item.getFullName().equals(authorEditionLogForm.getAuthor()) )
+                .findFirst().orElse(new Author());
+        Edition edition = editionService.getAll().stream()
+                .filter(item -> item.getName().equals(authorEditionLogForm.getEdition()) )
+                .findFirst().orElse(new Edition());
+        AuthorEditionLog authorEditionLogEdited = new AuthorEditionLog();
+        authorEditionLogEdited.setId(id);
+        authorEditionLogEdited.setAuthor(author);
+        authorEditionLogEdited.setEdition(edition);
+        authorEditionLogEdited.setAdditionalInformation(authorEditionLogForm.getAdditionalInformation());
+        service.edit(authorEditionLogEdited);
+        model.addAttribute("authorEditionLogs", service.getAll());
+        return "redirect:/web/authorEditionLog/list";
+    }
 }

@@ -11,7 +11,7 @@
     <br>
     Edition: <@spring.formSingleSelect "authorEditionLogForm.edition", editionsL, ""/>
     <br>
-    Additional form:<@spring.formInput "authorEditionLogForm.additionalInformation", "", "text"/>
+    Additional information:<@spring.formInput "authorEditionLogForm.additionalInformation", "", "text"/>
     <br>
     <input type="submit" value="Create"/>
 </form>
