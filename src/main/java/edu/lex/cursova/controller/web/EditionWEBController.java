@@ -47,15 +47,10 @@ public class EditionWEBController {
     String create(Model model) {
         EditionForm editionForm = new EditionForm();
 
-
-        Map<String, String> editionDirectionMap = editionDirectionService.getAll().stream()
-                .collect(Collectors.toMap(EditionDirection::getId, EditionDirection::getName));
-
         List<String> editionDirectionList = editionDirectionService.getAll().stream()
                 .map(EditionDirection::getName).collect(Collectors.toList());
 
         model.addAttribute("editionForm", editionForm);
-        model.addAttribute("editionDirections", editionDirectionMap);
         model.addAttribute("editionDirectionsL", editionDirectionList);
         return "editionAdd";
     }

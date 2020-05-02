@@ -8,18 +8,18 @@ import java.util.Objects;
 public class OrderProcess {
     @Id
     private String id;
+    private Order order;
     private LocalDateTime acceptDate;
     private LocalDateTime completionDate;
-    private boolean isComplited;
 
     public OrderProcess() {
     }
 
-    public OrderProcess(String id, LocalDateTime acceptDate, LocalDateTime completionDate, boolean isComplited) {
+    public OrderProcess(String id, Order order, LocalDateTime acceptDate, LocalDateTime completionDate) {
         this.id = id;
+        this.order = order;
         this.acceptDate = acceptDate;
         this.completionDate = completionDate;
-        this.isComplited = isComplited;
     }
 
     public String getId() {
@@ -28,6 +28,14 @@ public class OrderProcess {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public LocalDateTime getAcceptDate() {
@@ -46,37 +54,29 @@ public class OrderProcess {
         this.completionDate = completionDate;
     }
 
-    public boolean isComplited() {
-        return isComplited;
-    }
-
-    public void setComplited(boolean complited) {
-        isComplited = complited;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderProcess that = (OrderProcess) o;
-        return id == that.id &&
-                isComplited == that.isComplited &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(order, that.order) &&
                 Objects.equals(acceptDate, that.acceptDate) &&
                 Objects.equals(completionDate, that.completionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, acceptDate, completionDate, isComplited);
+        return Objects.hash(id, order, acceptDate, completionDate);
     }
 
     @Override
     public String toString() {
         return "OrderProcess{" +
-                "id=" + id +
+                "id='" + id + '\'' +
+                ", order=" + order +
                 ", acceptDate=" + acceptDate +
                 ", completionDate=" + completionDate +
-                ", isComplited=" + isComplited +
                 '}';
     }
 }

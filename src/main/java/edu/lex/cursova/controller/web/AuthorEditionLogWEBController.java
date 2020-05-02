@@ -1,12 +1,9 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.AuthorEditionLogForm;
-import edu.lex.cursova.form.AuthorForm;
 import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.AuthorEditionLog;
 import edu.lex.cursova.model.Edition;
-import edu.lex.cursova.repository.AuthorRepository;
-import edu.lex.cursova.repository.EditionRepository;
 import edu.lex.cursova.service.author.impls.AuthorServiceImpl;
 import edu.lex.cursova.service.authorEditionLog.impls.AuthorEditionLogServiceImpl;
 import edu.lex.cursova.service.edition.impls.EditionServiceImpl;
@@ -53,12 +50,6 @@ public class AuthorEditionLogWEBController {
     String create(Model model) {
         AuthorEditionLogForm authorEditionLogForm = new AuthorEditionLogForm();
 
-        Map<String, String> authorMap = authorService.getAll().stream()
-                .collect(Collectors.toMap(Author::getId, Author::getFullName));
-
-        Map<String, String> editionMap = editionService.getAll().stream()
-                .collect(Collectors.toMap(Edition::getId, Edition::getName));
-
         List<String> authorList = authorService.getAll().stream()
                 .map(Author::getFullName).collect(Collectors.toList());
 
@@ -66,9 +57,7 @@ public class AuthorEditionLogWEBController {
                 .map(Edition::getName).collect(Collectors.toList());
 
         model.addAttribute("authorEditionLogForm", authorEditionLogForm);
-        model.addAttribute("authors", authorMap);
         model.addAttribute("authorsL", authorList);
-        model.addAttribute("editions", editionMap);
         model.addAttribute("editionsL", editionList);
         return "authorEditionLogAdd";
     }

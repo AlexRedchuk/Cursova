@@ -16,7 +16,6 @@
             <th>Customer</th>
             <th>Product type</th>
             <th>Printery</th>
-            <th>Order access/th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>
@@ -25,13 +24,14 @@
                 <td>${order.id}</td>
                 <td>${order.numberOfOrder}</td>
                 <td>${order.customer.name}</td>
+                <td>${order.productType.name}</td>
                 <td>${order.printery.name}</td>
-                <td>${order.orderProcess.acceptDate}</td>
                 <td><a href="delete/${order.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${order.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>

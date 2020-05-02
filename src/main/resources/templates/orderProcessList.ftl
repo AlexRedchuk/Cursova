@@ -12,23 +12,24 @@
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
+            <th>Number of order</th>
             <th>Accept Date</th>
             <th>Completion Date</th>
-            <th>Complited</th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>
         <#list orderProcesses as orderProcess>
             <tr>
                 <td>${orderProcess.id}</td>
+                <td>${orderProcess.order.numberOfOrder}</td>
                 <td>${orderProcess.acceptDate}</td>
                 <td>${orderProcess.completionDate}</td>
-                <td><input type="checkbox"></td>
                 <td><a href="delete/${orderProcess.id}"><button>Delete</button></a></td>
-                <td><button>Edit</button></td>
+                <td><a href="edit/${orderProcess.id}"><button>Edit</button></a></td>
             </tr>
         </#list>
     </table>
+    <a href="create"><button>Create</button></a>
 </div>
 
 </body>

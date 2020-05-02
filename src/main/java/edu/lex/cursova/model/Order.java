@@ -11,18 +11,16 @@ public class Order {
     private Customer customer;
     private ProductType productType;
     private Printery printery;
-    private OrderProcess orderProcess;
 
     public Order() {
     }
 
-    public Order(String id, String numberOfOrder, Customer customer, ProductType productType, Printery printery, OrderProcess orderProcess) {
+    public Order(String id, String numberOfOrder, Customer customer, ProductType productType, Printery printery) {
         this.id = id;
         this.numberOfOrder = numberOfOrder;
         this.customer = customer;
         this.productType = productType;
         this.printery = printery;
-        this.orderProcess = orderProcess;
     }
 
     public String getId() {
@@ -65,13 +63,6 @@ public class Order {
         this.printery = printery;
     }
 
-    public OrderProcess getOrderProcess() {
-        return orderProcess;
-    }
-
-    public void setOrderProcess(OrderProcess orderProcess) {
-        this.orderProcess = orderProcess;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -82,13 +73,12 @@ public class Order {
                 numberOfOrder == order.numberOfOrder &&
                 Objects.equals(customer, order.customer) &&
                 productType == order.productType &&
-                Objects.equals(printery, order.printery) &&
-                Objects.equals(orderProcess, order.orderProcess);
+                Objects.equals(printery, order.printery);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, numberOfOrder, customer, productType, printery, orderProcess);
+        return Objects.hash(id, numberOfOrder, customer, productType, printery);
     }
 
     @Override
@@ -99,7 +89,6 @@ public class Order {
                 ", customer=" + customer +
                 ", productType=" + productType +
                 ", printery=" + printery +
-                ", orderProcess=" + orderProcess +
                 '}';
     }
 }

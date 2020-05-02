@@ -48,12 +48,6 @@ public class EditionOrderLogWEBController {
     String create(Model model) {
         EditionOrderLogForm editionOrderLogForm = new EditionOrderLogForm();
 
-        Map<String, String> orderMap = orderService.getAll().stream()
-                .collect(Collectors.toMap(Order::getId, Order::getNumberOfOrder));
-
-        Map<String, String> editionMap = editionService.getAll().stream()
-                .collect(Collectors.toMap(Edition::getId, Edition::getName));
-
         List<String> orderList = orderService.getAll().stream()
                 .map(Order::getNumberOfOrder).collect(Collectors.toList());
 
@@ -61,9 +55,7 @@ public class EditionOrderLogWEBController {
                 .map(Edition::getName).collect(Collectors.toList());
 
         model.addAttribute("editionOrderLogForm", editionOrderLogForm);
-        model.addAttribute("orders", orderMap);
         model.addAttribute("ordersL", orderList);
-        model.addAttribute("editions", editionMap);
         model.addAttribute("editionsL", editionList);
         return "editionOrderLogAdd";
     }
