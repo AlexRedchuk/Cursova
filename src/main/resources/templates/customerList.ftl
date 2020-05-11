@@ -9,13 +9,26 @@
 <body>
 <h3>Customer list</h3>
 <div>
+    <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/customer/list"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Customer name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
             <th>Type</th>
             <th>Name</th>
             <th>contactPerson</th>
-            <th>address</th>
+            <th>address <a href="/web/customer/list/sorted" type="button">Sort</a></th>
             <th>fax</th>
             <th>Delete</th>
             <th>Edit</th>

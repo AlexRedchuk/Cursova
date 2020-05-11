@@ -9,14 +9,27 @@
 <body>
 <h3>Edition list</h3>
 <div>
+    <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/edition/list"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Edition name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
-            <th>Edition code</th>
-            <th>Name</th>
-            <th>Number of pages</th>
-            <th>Circulation</th>
-            <th>Direction</th>
+            <th>Edition code <a href="/web/edition/list/sortedByEditionCode" type="button">Sort</a></th>
+            <th>Name <a href="/web/edition/list/sortedByName" type="button">Sort</a></th>
+            <th>Number of pages <a href="/web/edition/list/sortedByNumberOfPages" type="button">Sort</a></th>
+            <th>Circulation <a href="/web/edition/list/sortedByCirculation" type="button">Sort</a></th>
+            <th>Direction <a href="/web/edition/list/sortedByEditionDirection" type="button">Sort</a></th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>

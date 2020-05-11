@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService {
@@ -42,5 +44,17 @@ public class CustomerServiceImpl implements ICustomerService {
     public Customer delete(String id) {
         repository.deleteById(id);
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Customer> search(String word) {
+        return repository.findAll().stream()
+                .filter(customer -> customer.getName()
+                        .toLowerCase().contains(word.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Customer> sortByAddress() {
+        return repository.findAll().stream().sorted(Comparator.comparing(Customer::getAddress))
+                .collect(Collectors.toList());
     }
 }

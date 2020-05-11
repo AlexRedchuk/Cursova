@@ -9,11 +9,24 @@
 <body>
 <h3>Author edition log list</h3>
 <div>
+    <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/authorEditionLog/list"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Author or Edition name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
-            <th>Edition</th>
-            <th>Author</th>
+            <th>Edition <a href="/web/authorEditionLog/list/sortedByEdition" type="button">Sort</a></th>
+            <th>Author <a href="/web/authorEditionLog/list/sortedByAuthor" type="button">Sort</a></th>
             <th>Additional information</th>
             <th>Delete</th>
             <th>Edit</th>

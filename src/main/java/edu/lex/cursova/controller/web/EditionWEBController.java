@@ -2,19 +2,14 @@ package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.EditionForm;
 import edu.lex.cursova.form.EditionOrderLogForm;
-import edu.lex.cursova.model.Edition;
-import edu.lex.cursova.model.EditionDirection;
-import edu.lex.cursova.model.EditionOrderLog;
-import edu.lex.cursova.model.Order;
+import edu.lex.cursova.form.SearchForm;
+import edu.lex.cursova.model.*;
 import edu.lex.cursova.service.edition.impls.EditionServiceImpl;
 import edu.lex.cursova.service.editionDirection.impls.EditionDirectionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +26,115 @@ public class EditionWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("editions", service.getAll());
+        return "editionList";
+    }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEditionCode", method = RequestMethod.GET)
+    String sortEditionCode(Model model){
+        List<Edition> list = service.sortByEditionCode();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editions", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByName", method = RequestMethod.GET)
+    String sortName(Model model){
+        List<Edition> list = service.sortByName();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editions", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByNumberOfPages", method = RequestMethod.GET)
+    String sortNumberOfPages(Model model){
+        List<Edition> list = service.sortByNumberOfPages();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editions", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByCirculation", method = RequestMethod.GET)
+    String sortCirculation(Model model){
+        List<Edition> list = service.sortByCirculation();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editions", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEditionDirection", method = RequestMethod.GET)
+    String sortEditionDirection(Model model){
+        List<Edition> list = service.sortByEditionDirection();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editions", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionList";
+    }
+
+
+    @RequestMapping(value = "/list/sortedByEditionCode", method = RequestMethod.POST)
+    public String searchSortedByEditionCode(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByName", method = RequestMethod.POST)
+    public String searchSortedSortedByName(Model model,
+                                              @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByNubmerOfPages", method = RequestMethod.POST)
+    public String searchSortedSortedByNumberOfPages(Model model,
+                                           @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByCirculation", method = RequestMethod.POST)
+    public String searchSortedSortedByCirculation(Model model,
+                                                    @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
+        return "editionList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEditionDirection", method = RequestMethod.POST)
+    public String searchSortedSortedByEditionDirection(Model model,
+                                                  @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Edition> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editions", list);
         return "editionList";
     }
 

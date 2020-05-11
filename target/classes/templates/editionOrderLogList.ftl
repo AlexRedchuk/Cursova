@@ -9,6 +9,8 @@
 <body>
 <h3>Edition order log list</h3>
 <div>
+    <a href = "/"><button>Back to home</button></a>
+    <br>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>

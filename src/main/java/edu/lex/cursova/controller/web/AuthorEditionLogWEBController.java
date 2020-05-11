@@ -1,8 +1,10 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.AuthorEditionLogForm;
+import edu.lex.cursova.form.SearchForm;
 import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.AuthorEditionLog;
+import edu.lex.cursova.model.Customer;
 import edu.lex.cursova.model.Edition;
 import edu.lex.cursova.service.author.impls.AuthorServiceImpl;
 import edu.lex.cursova.service.authorEditionLog.impls.AuthorEditionLogServiceImpl;
@@ -10,10 +12,7 @@ import edu.lex.cursova.service.edition.impls.EditionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +33,59 @@ public class AuthorEditionLogWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("authorEditionLogs", service.getAll());
+        return "authorEditionLogList";
+    }
+
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<AuthorEditionLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("authorEditionLogs", list);
+        return "authorEditionLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByAuthor", method = RequestMethod.GET)
+    String sortAuthor(Model model){
+        List<AuthorEditionLog> list = service.sortByAuthor();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("authorEditionLogs", list);
+        model.addAttribute("searchForm", searchForm);
+        return "authorEditionLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEdition", method = RequestMethod.GET)
+    String sortEdition(Model model){
+        List<AuthorEditionLog> list = service.sortByEdition();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("authorEditionLogs", list);
+        model.addAttribute("searchForm", searchForm);
+        return "authorEditionLogList";
+    }
+
+
+    @RequestMapping(value = "/list/sortedByAuthor", method = RequestMethod.POST)
+    public String searchSortedByAuthor(Model model,
+                               @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<AuthorEditionLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("authorEditionLogs", list);
+        return "authorEditionLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEdition", method = RequestMethod.POST)
+    public String searchSortedSortedByEdition(Model model,
+                               @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<AuthorEditionLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("authorEditionLogs", list);
         return "authorEditionLogList";
     }
 
