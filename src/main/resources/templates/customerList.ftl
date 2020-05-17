@@ -22,6 +22,7 @@
             </form>
         </fieldset>
     </div>
+    <br>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>

@@ -10,11 +10,23 @@
 <h3>Contact person list</h3>
 <div>
     <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/contactPersonlist"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <br>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
-            <th>Full name</th>
+            <th>Full name <a href="/web/contactPerson/list/sorted" type="button">Sort</a></th>
             <th>Phone number</th>
             <th>Fax</th>
             <th>Delete</th>

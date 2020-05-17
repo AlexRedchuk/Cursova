@@ -1,15 +1,15 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.AuthorForm;
+import edu.lex.cursova.form.SearchForm;
 import edu.lex.cursova.model.Author;
 import edu.lex.cursova.service.author.impls.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("web/author")
@@ -19,9 +19,41 @@ public class AuthorWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("authors", service.getAll());
         return "authorList";
     }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Author> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("authors", list);
+        return "authorList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    String sort(Model model){
+        List<Author> list = service.sortByName();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("authors", list);
+        model.addAttribute("searchForm", searchForm);
+        return "authorList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.POST)
+    public String searchSorted(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Author> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("authors", list);
+        return "authorList";
+    }
+
 
     @RequestMapping("/delete/{id}")
     String delete(Model model,

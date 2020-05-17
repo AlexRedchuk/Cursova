@@ -1,15 +1,16 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.EditionDirectionForm;
+import edu.lex.cursova.form.SearchForm;
+import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.EditionDirection;
 import edu.lex.cursova.service.editionDirection.impls.EditionDirectionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/web/editionDirection")
@@ -19,9 +20,41 @@ public class EditionDirectionWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("editionDirections", service.getAll());
         return "editionDirectionList";
     }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<EditionDirection> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editionDirections", list);
+        return "editionDirectionList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    String sort(Model model){
+        List<EditionDirection> list = service.sortByName();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editionDirections", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionDirectionList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.POST)
+    public String searchSorted(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<EditionDirection> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editionDirections", list);
+        return "editionDirectionList";
+    }
+
 
     @RequestMapping("/delete/{id}")
     String delete(Model model,

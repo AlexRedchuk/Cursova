@@ -1,15 +1,16 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.PrinteryForm;
+import edu.lex.cursova.form.SearchForm;
+import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.Printery;
 import edu.lex.cursova.service.printery.impls.PrinteryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/web/printery")
@@ -19,7 +20,56 @@ public class PrinteryWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("printeries", service.getAll());
+        return "printeryList";
+    }
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Printery> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("printeries", list);
+        return "printeryList";
+    }
+
+    @RequestMapping(value = "/list/sortedByName", method = RequestMethod.GET)
+    String sortName(Model model){
+        List<Printery> list = service.sortByName();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("printeries", list);
+        model.addAttribute("searchForm", searchForm);
+        return "printeryList";
+    }
+
+    @RequestMapping(value = "/list/sortedByAddress", method = RequestMethod.GET)
+    String sortAddress(Model model){
+        List<Printery> list = service.sortByAddress();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("printeries", list);
+        model.addAttribute("searchForm", searchForm);
+        return "printeryList";
+    }
+
+    @RequestMapping(value = "/list/sortedByName", method = RequestMethod.POST)
+    public String searchSortedByName(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Printery> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("printeries", list);
+        return "printeryList";
+    }
+
+    @RequestMapping(value = "/list/sortedByAddress", method = RequestMethod.POST)
+    public String searchSortedByAddress(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Printery> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("printeries", list);
         return "printeryList";
     }
 

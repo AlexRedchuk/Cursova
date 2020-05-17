@@ -4,7 +4,6 @@ import edu.lex.cursova.form.AuthorEditionLogForm;
 import edu.lex.cursova.form.SearchForm;
 import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.AuthorEditionLog;
-import edu.lex.cursova.model.Customer;
 import edu.lex.cursova.model.Edition;
 import edu.lex.cursova.service.author.impls.AuthorServiceImpl;
 import edu.lex.cursova.service.authorEditionLog.impls.AuthorEditionLogServiceImpl;

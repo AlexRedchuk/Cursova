@@ -1,15 +1,16 @@
 package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.ContactPersonForm;
+import edu.lex.cursova.form.SearchForm;
+import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.ContactPerson;
 import edu.lex.cursova.service.contactPerson.impls.ContactPersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("web/contactPerson")
@@ -19,7 +20,38 @@ public class ContactPersonWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("contactPersons", service.getAll());
+        return "contactPersonList";
+    }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<ContactPerson> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("contactPersons", list);
+        return "contactPersonList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.GET)
+    String sortAuthor(Model model){
+        List<ContactPerson> list = service.sortByName();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("contactPersons", list);
+        model.addAttribute("searchForm", searchForm);
+        return "contactPersonList";
+    }
+
+    @RequestMapping(value = "/list/sorted", method = RequestMethod.POST)
+    public String searchSortedByAuthor(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<ContactPerson> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("contactPersons", list);
         return "contactPersonList";
     }
 

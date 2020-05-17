@@ -10,12 +10,24 @@
 <h3>Edition order log list</h3>
 <div>
     <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/editionOrderLog/list"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Author name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <br>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
-            <th>Edition name</th>
-            <th>Number of order</th>
+            <th>Edition name <a href="/web/editionOrderLog/list/sortedByEdition" type="button">Sort</a></th>
+            <th>Number of order <a href="/web/editionOrderLog/list/sortedByOrder" type="button">Sort</a></th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>

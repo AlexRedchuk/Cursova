@@ -2,6 +2,7 @@ package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.AuthorEditionLogForm;
 import edu.lex.cursova.form.OrderForm;
+import edu.lex.cursova.form.SearchForm;
 import edu.lex.cursova.model.*;
 import edu.lex.cursova.service.customer.impls.CustomerServiceImpl;
 import edu.lex.cursova.service.order.impls.OrderServiceImpl;
@@ -10,10 +11,7 @@ import edu.lex.cursova.service.productType.impls.ProductTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +33,96 @@ public class OrderWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("orders", service.getAll());
+        return "orderList";
+    }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Order> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("orders", list);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByCustomer", method = RequestMethod.GET)
+    String sortCustomer(Model model){
+        List<Order> list = service.sortByCustomer();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("orders", list);
+        model.addAttribute("searchForm", searchForm);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByNumberOfOrder", method = RequestMethod.GET)
+    String sortNumberOfOrder(Model model){
+        List<Order> list = service.sortByNumberOfOrder();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("orders", list);
+        model.addAttribute("searchForm", searchForm);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByPrintery", method = RequestMethod.GET)
+    String sortPrintery(Model model){
+        List<Order> list = service.sortByPrintery();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("orders", list);
+        model.addAttribute("searchForm", searchForm);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByType", method = RequestMethod.GET)
+    String sortType(Model model){
+        List<Order> list = service.sortByType();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("orders", list);
+        model.addAttribute("searchForm", searchForm);
+        return "orderList";
+    }
+
+
+    @RequestMapping(value = "/list/sortedByCustomer", method = RequestMethod.POST)
+    public String searchSortedSortedByCustomer(Model model,
+                                           @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Order> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("orders", list);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByNumberOfOrder", method = RequestMethod.POST)
+    public String searchSortedSortedByNumberOfOrder(Model model,
+                                                    @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Order> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("orders", list);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByPrintery", method = RequestMethod.POST)
+    public String searchSortedSortedPrintery(Model model,
+                                                  @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Order> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("orders", list);
+        return "orderList";
+    }
+
+    @RequestMapping(value = "/list/sortedByType", method = RequestMethod.POST)
+    public String searchSortedSortedByType(Model model,
+                                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<Order> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("orders", list);
         return "orderList";
     }
 

@@ -2,6 +2,7 @@ package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.AuthorEditionLogForm;
 import edu.lex.cursova.form.EditionOrderLogForm;
+import edu.lex.cursova.form.SearchForm;
 import edu.lex.cursova.model.*;
 import edu.lex.cursova.service.edition.impls.EditionServiceImpl;
 import edu.lex.cursova.service.editionOrderLog.impls.EditionOrderLogServiceImpl;
@@ -9,10 +10,7 @@ import edu.lex.cursova.service.order.impls.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +30,58 @@ public class EditionOrderLogWEBController {
 
     @RequestMapping("/list")
     String getAll(Model model) {
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("searchForm", searchForm);
         model.addAttribute("editionOrderLogs", service.getAll());
+        return "editionOrderLogList";
+    }
+
+    @PostMapping(value = "/list")
+    public String search(Model model,
+                         @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<EditionOrderLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editionOrderLogs", list);
+        return "editionOrderLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByOrder", method = RequestMethod.GET)
+    String sortOrder(Model model){
+        List<EditionOrderLog> list = service.sortByOrder();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editionOrderLogs", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionOrderLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEdition", method = RequestMethod.GET)
+    String sortEdition(Model model){
+        List<EditionOrderLog> list = service.sortByEdition();
+        SearchForm searchForm = new SearchForm();
+        model.addAttribute("editionOrderLogs", list);
+        model.addAttribute("searchForm", searchForm);
+        return "editionOrderLogList";
+    }
+
+
+    @RequestMapping(value = "/list/sortedByOrder", method = RequestMethod.POST)
+    public String searchSortedByOrder(Model model,
+                                       @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<EditionOrderLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editionOrderLogs", list);
+        return "editionOrderLogList";
+    }
+
+    @RequestMapping(value = "/list/sortedByEdition", method = RequestMethod.POST)
+    public String searchSortedSortedByEdition(Model model,
+                                              @ModelAttribute("searchForm") SearchForm searchForm) {
+        String word = searchForm.getSearchField();
+        List<EditionOrderLog> list = service.search(word);
+        model.addAttribute("searchForm", searchForm);
+        model.addAttribute("editionOrderLogs", list);
         return "editionOrderLogList";
     }
 

@@ -10,12 +10,24 @@
 <h3>Printery list</h3>
 <div>
     <a href = "/"><button>Back to home</button></a>
+    <a href = "/web/printery/list"><button>Clear filters</button></a>
+    <br>
+    <div>
+        <fieldset>
+            <legend>Find  customer</legend>
+            <form name="search" action="" method="POST">
+                Author name:<@spring.formInput "searchForm.searchField" "" "text"/>
+                <br>
+                <input type="submit" value="Search"/>
+            </form>
+        </fieldset>
+    </div>
     <br>
     <table class="table table-sm table-dark">
         <tr class="table-success">
             <th>ID</th>
-            <th>Name</th>
-            <th>Address</th>
+            <th>Name <a href="/web/printery/list/sortedByName" type="button">Sort</a></th>
+            <th>Address <a href="/web/printery/list/sortedByAddress" type="button">Sort</a></th>
             <th>Phone number</th>
             <th>Delete</th>
             <th>Edit</th>
