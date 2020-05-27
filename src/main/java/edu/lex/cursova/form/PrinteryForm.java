@@ -1,8 +1,14 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class PrinteryForm {
+    @Size(min = 2, max = 50)
     private String name;
+    @Size(max = 50)
     private String address;
+    @Pattern(regexp = "0[0-9]{9}")
     private String phoneNumber;
 
     public PrinteryForm() {

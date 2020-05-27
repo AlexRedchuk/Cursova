@@ -1,6 +1,9 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.Pattern;
+
 public class OrderForm {
+    @Pattern(regexp = "[0-9]{6}")
     private String numberOfOrder;
     private String customer;
     private String productType;

@@ -7,8 +7,10 @@ import edu.lex.cursova.service.author.impls.AuthorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -71,11 +73,23 @@ public class AuthorWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("authorForm") AuthorForm authorForm) {
+    String create(Model model, @ModelAttribute("authorForm")@Valid AuthorForm authorForm, BindingResult bindingResult) {
         Author author = new Author();
         author.setFullName(authorForm.getFullName());
         author.setAddress(authorForm.getAddress());
         author.setPhoneNumber(authorForm.getPhoneNumber());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("fullName")){
+                System.out.println("Validation error(Author table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Author table): Unvalid address entered");
+            }
+            if(bindingResult.hasFieldErrors("phoneNumber")){
+                System.out.println("Validation error(Author table): Unvalid phone number entered");
+            }
+            return "authorAdd";
+        }
         service.save(author);
         model.addAttribute("authors", service.getAll());
         return "redirect:/web/author/list";
@@ -93,12 +107,24 @@ public class AuthorWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorForm") AuthorForm authorForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorForm")@Valid AuthorForm authorForm, BindingResult bindingResult) {
         Author author = new Author();
         author.setId(id);
         author.setFullName(authorForm.getFullName());
         author.setAddress(authorForm.getAddress());
         author.setPhoneNumber(authorForm.getPhoneNumber());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("fullName")){
+                System.out.println("Validation error(Author table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Author table): Unvalid address entered");
+            }
+            if(bindingResult.hasFieldErrors("phoneNumber")){
+                System.out.println("Validation error(Author table): Unvalid phone number entered");
+            }
+            return "authorAdd";
+        }
         service.save(author);
         model.addAttribute("authors", service.getAll());
         return "redirect:/web/author/list";

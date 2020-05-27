@@ -57,7 +57,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     public List<Order> sortByNumberOfOrder() {
-        return repository.findAll().stream().sorted(Comparator.comparing(Order::getNumberOfOrder))
+        return repository.findAll().stream().sorted(Comparator.comparing(Order::getNumberOfOrder).reversed())
                 .collect(Collectors.toList());
     }
 

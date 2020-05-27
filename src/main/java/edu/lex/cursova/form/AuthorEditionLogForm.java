@@ -1,8 +1,11 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.Size;
+
 public class AuthorEditionLogForm {
     private String author;
     private String edition;
+    @Size(max = 50)
     private String additionalInformation;
 
     public AuthorEditionLogForm() {

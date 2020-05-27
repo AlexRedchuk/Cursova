@@ -34,6 +34,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/**/create").hasRole("ADMIN")
                 .antMatchers("/web/**/delete/**").hasRole("ADMIN")
                 .antMatchers("/web/**/edit/**").hasRole("ADMIN")
+                .antMatchers("/swagger-ui.html").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

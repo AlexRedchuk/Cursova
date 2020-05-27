@@ -9,8 +9,10 @@ import edu.lex.cursova.service.editionDirection.impls.EditionDirectionServiceImp
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -159,7 +161,7 @@ public class EditionWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("editionForm") EditionForm editionForm) {
+    String create(Model model, @ModelAttribute("editionForm")@Valid EditionForm editionForm, BindingResult bindingResult) {
         Edition edition = new Edition();
         edition.setId(null);
         edition.setEditionCode(editionForm.getEditionCode());
@@ -170,6 +172,22 @@ public class EditionWEBController {
                 .filter(item -> item.getName().equals(editionForm.getEditionDirection()) )
                 .findFirst().orElse(new EditionDirection());
         edition.setEditionDirection(editionDirection);
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("editionCode")){
+                System.out.println("Validation error(Edition table): Unvalid edition code entered");
+            }
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Edition table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("numberOfPages")){
+                System.out.println("Validation error(Edition table): Unvalid number of pages entered");
+            }
+            if(bindingResult.hasFieldErrors("circulation")){
+                System.out.println("Validation error(Edition table): Unvalid circulation entered");
+            }
+
+            return "editionAdd";
+        }
         service.save(edition);
         model.addAttribute("editions", service.getAll());
         return "redirect:/web/edition/list";
@@ -193,7 +211,8 @@ public class EditionWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("editionorm") EditionForm editionForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("edition")@Valid EditionForm editionForm,
+                BindingResult bindingResult) {
 
         EditionDirection editionDirection = editionDirectionService.getAll().stream()
                 .filter(item -> item.getName().equals(editionForm.getEditionDirection()) )
@@ -205,6 +224,22 @@ public class EditionWEBController {
         editionEdited.setNumberOfPages(editionForm.getNumberOfPages());
         editionEdited.setCirculation(editionForm.getCirculation());
         editionEdited.setEditionDirection(editionDirection);
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("editionCode")){
+                System.out.println("Validation error(Edition table): Unvalid edition code entered");
+            }
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Edition table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("numberOfPages")){
+                System.out.println("Validation error(Edition table): Unvalid number of pages entered");
+            }
+            if(bindingResult.hasFieldErrors("circulation")){
+                System.out.println("Validation error(Edition table): Unvalid circulation entered");
+            }
+
+            return "editionAdd";
+        }
         service.edit(editionEdited);
         model.addAttribute("editions", service.getAll());
         return "redirect:/web/edition/list";

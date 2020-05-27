@@ -1,7 +1,11 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.Size;
+
 public class ProductTypeForm {
+    @Size(min = 2, max = 50)
     private String name;
+    @Size(max = 50)
     private String description;
 
     public ProductTypeForm() {

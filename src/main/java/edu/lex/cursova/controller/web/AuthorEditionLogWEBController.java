@@ -11,8 +11,10 @@ import edu.lex.cursova.service.edition.impls.EditionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -113,7 +115,7 @@ public class AuthorEditionLogWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("authorEditionLogForm") AuthorEditionLogForm authorEditionLogForm) {
+    String create(Model model, @ModelAttribute("authorEditionLogForm")@Valid AuthorEditionLogForm authorEditionLogForm, BindingResult bindingResult) {
         AuthorEditionLog authorEditionLog = new AuthorEditionLog();
         authorEditionLog.setId(null);
         Author author = authorService.getAll().stream()
@@ -125,6 +127,12 @@ public class AuthorEditionLogWEBController {
                 .findFirst().orElse(new Edition());
         authorEditionLog.setEdition(edition);
         authorEditionLog.setAdditionalInformation(authorEditionLogForm.getAdditionalInformation());
+        if(bindingResult.hasErrors()){
+            if (bindingResult.hasFieldErrors("additionalInfomation")) {
+                System.out.println("Validation error(Author Edition log table): Too much additional information");
+            }
+            return "authorEditionLogAdd";
+        }
         service.save(authorEditionLog);
         model.addAttribute("authorEditionLogs", service.getAll());
         return "redirect:/web/authorEditionLog/list";
@@ -150,7 +158,7 @@ public class AuthorEditionLogWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorEditionLogForm") AuthorEditionLogForm authorEditionLogForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("authorEditionLogForm")@Valid AuthorEditionLogForm authorEditionLogForm, BindingResult bindingResult) {
         Author author = authorService.getAll().stream()
                 .filter(item -> item.getFullName().equals(authorEditionLogForm.getAuthor()) )
                 .findFirst().orElse(new Author());
@@ -162,6 +170,13 @@ public class AuthorEditionLogWEBController {
         authorEditionLogEdited.setAuthor(author);
         authorEditionLogEdited.setEdition(edition);
         authorEditionLogEdited.setAdditionalInformation(authorEditionLogForm.getAdditionalInformation());
+        if(bindingResult.hasErrors()){
+            if (bindingResult.hasFieldErrors("additionalInformation")) {
+                System.out.println("Validation error(Author edition log table): Too much additional information");
+            }
+
+            return "authorEditionLogAdd";
+        }
         service.edit(authorEditionLogEdited);
         model.addAttribute("authorEditionLogs", service.getAll());
         return "redirect:/web/authorEditionLog/list";

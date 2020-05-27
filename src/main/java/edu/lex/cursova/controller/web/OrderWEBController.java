@@ -11,8 +11,10 @@ import edu.lex.cursova.service.productType.impls.ProductTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -155,7 +157,7 @@ public class OrderWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("orderForm") OrderForm orderForm) {
+    String create(Model model, @ModelAttribute("orderForm")@Valid OrderForm orderForm, BindingResult bindingResult) {
         Order order = new Order();
         order.setId(null);
         order.setNumberOfOrder(orderForm.getNumberOfOrder());
@@ -171,6 +173,12 @@ public class OrderWEBController {
                 .filter(item -> item.getName().equals(orderForm.getPrintery()) )
                 .findFirst().orElse(new Printery());
         order.setPrintery(printery);
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("numberOfOrder")){
+                System.out.println("Validation error(Order table): Unvalid number of order entered");
+            }
+            return "error";
+        }
         service.save(order);
         model.addAttribute("orders", service.getAll());
         return "redirect:/web/order/list";
@@ -202,7 +210,8 @@ public class OrderWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("orderForm") OrderForm orderForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("orderForm")@Valid OrderForm orderForm,
+                BindingResult bindingResult) {
         Customer customer = customerService.getAll().stream()
                 .filter(item -> item.getName().equals(orderForm.getCustomer()) )
                 .findFirst().orElse(new Customer());
@@ -218,6 +227,12 @@ public class OrderWEBController {
         orderEdited.setCustomer(customer);
         orderEdited.setProductType(productType);
         orderEdited.setPrintery(printery);
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("numberOfOrder")){
+                System.out.println("Validation error(Order table): Unvalid number of order entered");
+            }
+            return "error";
+        }
         service.edit(orderEdited);
         model.addAttribute("orders", service.getAll());
         return "redirect:/web/order/list";

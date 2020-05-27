@@ -8,8 +8,10 @@ import edu.lex.cursova.service.printery.impls.PrinteryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -89,11 +91,23 @@ public class PrinteryWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("printeryForm") PrinteryForm printeryForm) {
+    String create(Model model, @ModelAttribute("printeryForm")@Valid PrinteryForm printeryForm, BindingResult bindingResult) {
         Printery printery = new Printery();
         printery.setName(printeryForm.getName());
         printery.setAddress(printeryForm.getAddress());
         printery.setPhoneNumber(printeryForm.getPhoneNumber());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Printery table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Printery table): Unvalid address entered");
+            }
+            if(bindingResult.hasFieldErrors("phoneNumber")){
+                System.out.println("Validation error(Printery table): Unvalid phone number entered");
+            }
+            return "printeryAdd";
+        }
         service.save(printery);
         model.addAttribute("printeries", service.getAll());
         return "redirect:/web/printery/list";
@@ -111,12 +125,25 @@ public class PrinteryWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("printeryForm") PrinteryForm printeryForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("printeryForm")@Valid PrinteryForm printeryForm,
+                BindingResult bindingResult) {
         Printery printery = new Printery();
         printery.setId(id);
         printery.setName(printeryForm.getName());
         printery.setAddress(printeryForm.getAddress());
         printery.setPhoneNumber(printeryForm.getPhoneNumber());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Printery table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Printery table): Unvalid address entered");
+            }
+            if(bindingResult.hasFieldErrors("phoneNumber")){
+                System.out.println("Validation error(Printery table): Unvalid phone number entered");
+            }
+            return "printeryAdd";
+        }
         service.save(printery);
         model.addAttribute("printeries", service.getAll());
         return "redirect:/web/printery/list";

@@ -2,6 +2,8 @@ package edu.lex.cursova.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class ContactPerson {

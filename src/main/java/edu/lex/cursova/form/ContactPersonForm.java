@@ -1,8 +1,16 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class ContactPersonForm {
+    @NotNull
+    @Size(min=3, max=20, message = "Name is not valid")
     private String fullName;
+    @Pattern(regexp = "0[0-9]{9}")
     private String phoneNumber;
+    @Pattern(regexp = "[0-9]{10}")
     private String fax;
 
     public ContactPersonForm() {

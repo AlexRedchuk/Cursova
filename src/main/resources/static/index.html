@@ -1,64 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Piedra&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-<h1>Hello spring boot!</h1>
-<div style="display: flex;
-            justify-content: space-between;
-            width: 400px;">
-    <div>
-        <a href="/swagger-ui.html">SWAGGER</a>
-        <br>
-        <a href="/api/customer/get/list">Customer list</a>
-        <br>
-        <a href="/api/printery/get/list">Printery list</a>
-        <br>
-        <a href="/api/author/get/list">Author list</a>
-        <br>
-        <a href="/api/editionDirection/get/list">Edition Direction list</a>
-        <br>
-        <a href="/api/contactPerson/get/list">Contact Person list</a>
-        <br>
-        <a href="/api/editionOrderLog/get/list">Edition-order log list</a>
-        <br>
-        <a href="/api/authorEditionLog/get/list">Author-edition log list</a>
-        <br>
-        <a href="/api/edition/get/list">Edition list</a>
-        <br>
-        <a href="/api/productType/get/list">Product Type list</a>
-        <br>
-        <a href="/api/order/get/list">Order list</a>
-        <br>
-        <a href="/api/orderProcess/get/list">Order Process list</a>
-        <br>
+<main>
+    <div class="header">
+        <div class="head_left">
+            <i class="fa fa-modx fa-2x"></i><span>EDITIONLAND</span>
+        </div>
+        <div class="head_right">
+                <a href="" class="menu_button "><i class="fa fa-home"></i><span>Home</span></a>
+                <a href="/tables.html" class="menu_button glow-on-hover"><i class="fa fa-table"></i><span>Tables</span></a>
+                <a href="/swagger-ui.html" class="menu_button fa fa-code"><span>Swagger</span></a>
+        </div>
+
     </div>
-    <div>
-        <a href="/web/customer/list">Customer table</a>
-        <br>
-        <a href="/web/printery/list">Printery table</a>
-        <br>
-        <a href="/web/author/list">Author table</a>
-        <br>
-        <a href="/web/editionDirection/list">Edition Direction table</a>
-        <br>
-        <a href="/web/productType/list">Product Type table</a>
-        <br>
-        <a href="/web/order/list">Order table</a>
-        <br>
-        <a href="/web/orderProcess/list">Order Process table</a>
-        <br>
-        <a href="/web/edition/list">Edition table</a>
-        <br>
-        <a href="/web/contactPerson/list">Contact Person table</a>
-        <br>
-        <a href="/web/editionOrderLog/list">Edition-order log table</a>
-        <br>
-        <a href="/web/authorEditionLog/list">Author-edition log table</a>
-        <br>
-    </div>
-</div>
+    <div class="content"></div>
+    <div class="footer"></div>
+</main>
 </body>
 </html>

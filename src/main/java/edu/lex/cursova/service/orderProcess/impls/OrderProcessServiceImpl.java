@@ -57,7 +57,7 @@ public class OrderProcessServiceImpl implements IOrderProcessService {
     }
 
     public List<OrderProcess> sortByNumberOfProcess() {
-        return repository.findAll().stream().sorted(Comparator.comparing(order -> order.getOrder().getNumberOfOrder()))
+        return repository.findAll().stream().sorted(Comparator.comparing(orderProcess -> orderProcess.getOrder().getNumberOfOrder()))
                 .collect(Collectors.toList());
     }
 }

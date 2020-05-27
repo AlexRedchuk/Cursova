@@ -8,8 +8,10 @@ import edu.lex.cursova.service.editionDirection.impls.EditionDirectionServiceImp
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -72,10 +74,20 @@ public class EditionDirectionWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("editionDirectionForm") EditionDirectionForm editionDirectionForm) {
+    String create(Model model, @ModelAttribute("editionDirectionForm")@Valid EditionDirectionForm editionDirectionForm, BindingResult bindingResult) {
         EditionDirection editionDirection = new EditionDirection();
         editionDirection.setName(editionDirectionForm.getName());
         editionDirection.setDescription(editionDirectionForm.getDescription());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Edition Direction table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("description")){
+                System.out.println("Validation error(Edition Direction table): Too long description");
+            }
+
+            return "editionDirectionAdd";
+        }
         service.save(editionDirection);
         model.addAttribute("editionDirections", service.getAll());
         return "redirect:/web/editionDirection/list";
@@ -93,11 +105,21 @@ public class EditionDirectionWEBController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("editionDirectionForm")
-            EditionDirectionForm editionDirectionForm) {
+           @Valid EditionDirectionForm editionDirectionForm, BindingResult bindingResult) {
         EditionDirection editionDirection = new EditionDirection();
         editionDirection.setId(id);
         editionDirection.setName(editionDirectionForm.getName());
         editionDirection.setDescription(editionDirectionForm.getDescription());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Edition Direction table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("description")){
+                System.out.println("Validation error(Edition Direction table): Too long description");
+            }
+
+            return "editionDirectionAdd";
+        }
         service.save(editionDirection);
         model.addAttribute("editionDirections", service.getAll());
         return "redirect:/web/editionDirection/list";

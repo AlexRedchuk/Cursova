@@ -2,14 +2,17 @@ package edu.lex.cursova.controller.web;
 
 import edu.lex.cursova.form.ContactPersonForm;
 import edu.lex.cursova.form.SearchForm;
-import edu.lex.cursova.model.Author;
+
 import edu.lex.cursova.model.ContactPerson;
 import edu.lex.cursova.service.contactPerson.impls.ContactPersonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -63,6 +66,7 @@ public class ContactPersonWEBController {
         return "redirect:/web/contactPerson/list";
     }
 
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     String create(Model model) {
         ContactPersonForm contactPersonForm = new ContactPersonForm();
@@ -70,12 +74,25 @@ public class ContactPersonWEBController {
         return "contactPersonAdd";
     }
 
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("contactPersonForm") ContactPersonForm contactPersonForm) {
+    String create(Model model,@Valid @ModelAttribute("contactPersonForm")  ContactPersonForm contactPersonForm, BindingResult bindingResult) {
         ContactPerson contactPerson = new ContactPerson();
         contactPerson.setFullName(contactPersonForm.getFullName());
         contactPerson.setPhoneNumber(contactPersonForm.getPhoneNumber());
         contactPerson.setFax(contactPersonForm.getFax());
+        if(bindingResult.hasErrors()){
+            if (bindingResult.hasFieldErrors("fullName")) {
+                System.out.println("Validation error(Contact Person table): Unvalid name entered");
+            }
+            if (bindingResult.hasFieldErrors("phoneNumber")) {
+                System.out.println("Validation error(Contact person table): Unvalid phone number entered");
+            }
+            if (bindingResult.hasFieldErrors("fax")) {
+                System.out.println("Validation error(Contact person table): Unvalid fax entered");
+            }
+            return "contactPersonAdd";
+        }
         service.save(contactPerson);
         model.addAttribute("contactPersons", service.getAll());
         return "redirect:/web/contactPerson/list";
@@ -93,12 +110,24 @@ public class ContactPersonWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("contactPersonForm") ContactPersonForm contactPersonForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("contactPersonForm")@Valid ContactPersonForm contactPersonForm, BindingResult bindingResult) {
         ContactPerson contactPerson = new ContactPerson();
         contactPerson.setId(id);
         contactPerson.setFullName(contactPersonForm.getFullName());
         contactPerson.setPhoneNumber(contactPersonForm.getPhoneNumber());
         contactPerson.setFax(contactPersonForm.getFax());
+        if(bindingResult.hasErrors()){
+            if (bindingResult.hasFieldErrors("fullName")) {
+                System.out.println("Validation error(Contact person table): Unvalid name entered");
+            }
+            if (bindingResult.hasFieldErrors("phoneNumber")) {
+                System.out.println("Validation error(Contact person table): Unvalid phone number entered");
+            }
+            if (bindingResult.hasFieldErrors("fax")) {
+                System.out.println("Validation error(Contact person table): Unvalid fax entered");
+            }
+            return "contactPersonAdd";
+        }
         service.save(contactPerson);
         model.addAttribute("contactPersons", service.getAll());
         return "redirect:/web/contactPerson/list";

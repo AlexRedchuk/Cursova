@@ -1,10 +1,16 @@
 package edu.lex.cursova.form;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class CustomerForm {
     private String type;
+    @Size(min = 2, max = 20)
     private String name;
     private String contactPerson;
+    @Size(max = 50)
     private String address;
+    @Pattern(regexp = "[0-9]{10}")
     private String fax;
 
     public CustomerForm() {

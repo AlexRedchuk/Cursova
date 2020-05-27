@@ -10,8 +10,10 @@ import edu.lex.cursova.service.productType.impls.ProductTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -73,10 +75,21 @@ public class ProductTypeWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("productTypeForm") ProductTypeForm productTypeForm) {
+    String create(Model model, @ModelAttribute("productTypeForm")@Valid ProductTypeForm productTypeForm,
+                  BindingResult bindingResult) {
         ProductType productType = new ProductType();
         productType.setName(productTypeForm.getName());
         productType.setDescription(productTypeForm.getDescription());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Product type table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("description")){
+                System.out.println("Validation error(Product type table): Description is too long");
+            }
+
+            return "productTypeAdd";
+        }
         service.save(productType);
         model.addAttribute("productTypes", service.getAll());
         return "redirect:/web/productType/list";
@@ -94,11 +107,21 @@ public class ProductTypeWEBController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     String edit(Model model, @PathVariable("id") String id, @ModelAttribute("productTypeForm")
-            ProductTypeForm productTypeForm) {
+            @Valid ProductTypeForm productTypeForm, BindingResult bindingResult) {
         ProductType productType = new ProductType();
         productType.setId(id);
         productType.setName(productTypeForm.getName());
         productType.setDescription(productTypeForm.getDescription());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Product type table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("description")){
+                System.out.println("Validation error(Product type table): Description is too long");
+            }
+
+            return "productTypeAdd";
+        }
         service.save(productType);
         model.addAttribute("productTypes", service.getAll());
         return "redirect:/web/productType/list";

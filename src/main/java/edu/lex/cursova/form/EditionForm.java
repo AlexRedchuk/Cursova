@@ -2,10 +2,18 @@ package edu.lex.cursova.form;
 
 import edu.lex.cursova.model.EditionDirection;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 public class EditionForm {
+    @Pattern(regexp = "[a-z0-9]{5}")
     private String editionCode;
+    @Size(min = 2, max = 20)
     private String name;
+    @Positive
     private int numberOfPages;
+    @Positive
     private int circulation;
     private String editionDirection;
 

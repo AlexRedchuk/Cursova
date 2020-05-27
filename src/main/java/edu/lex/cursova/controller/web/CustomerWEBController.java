@@ -8,8 +8,10 @@ import edu.lex.cursova.service.customer.impls.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,7 +86,7 @@ public class CustomerWEBController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    String create(Model model, @ModelAttribute("customerForm") CustomerForm customerForm) {
+    String create(Model model, @ModelAttribute("customerForm")@Valid CustomerForm customerForm, BindingResult bindingResult) {
         Customer customer = new Customer();
         customer.setId(null);
         OrganisationType type = OrganisationType.ORGANISATION;
@@ -103,6 +105,18 @@ public class CustomerWEBController {
         customer.setContactPerson(contactPerson);
         customer.setAddress(customerForm.getAddress());
         customer.setFax(customerForm.getFax());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Customer table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Customer table): Unvalid phone number entered");
+            }
+            if(bindingResult.hasFieldErrors("fax")){
+                System.out.println("Validation error(Customer table): Unvalid fax  entered");
+            }
+            return "error";
+        }
         service.save(customer);
         model.addAttribute("customers", service.getAll());
         return "redirect:/web/customer/list";
@@ -127,7 +141,8 @@ public class CustomerWEBController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("customerForm") CustomerForm customerForm) {
+    String edit(Model model, @PathVariable("id") String id, @ModelAttribute("customerForm")@Valid CustomerForm customerForm,
+                BindingResult bindingResult) {
         ContactPerson contactPerson = contactPersonService.getAll().stream()
                 .filter(item -> item.getFullName().equals(customerForm.getContactPerson()) )
                 .findFirst().orElse(new ContactPerson());
@@ -146,6 +161,18 @@ public class CustomerWEBController {
         customerEdited.setContactPerson(contactPerson);
         customerEdited.setAddress(customerForm.getAddress());
         customerEdited.setFax(customerForm.getFax());
+        if(bindingResult.hasErrors()) {
+            if(bindingResult.hasFieldErrors("name")){
+                System.out.println("Validation error(Customer table): Unvalid name entered");
+            }
+            if(bindingResult.hasFieldErrors("address")){
+                System.out.println("Validation error(Customer table): Unvalid phone number entered");
+            }
+            if(bindingResult.hasFieldErrors("fax")){
+                System.out.println("Validation error(Customer table): Unvalid fax  entered");
+            }
+            return "error";
+        }
         service.edit(customerEdited);
         model.addAttribute("customers", service.getAll());
         return "redirect:/web/customer/list";
