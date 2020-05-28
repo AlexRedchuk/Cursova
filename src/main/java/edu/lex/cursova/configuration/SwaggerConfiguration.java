@@ -13,9 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SwaggerConfiguration.class, args);
-    }
 
     @Bean
     public Docket swaggerConfig() {
