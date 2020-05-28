@@ -28,6 +28,11 @@ public class EditionAPIController {
         return service.save(edition);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    Edition edit (@RequestBody Edition edition) {
+        return service.save(edition);
+    }
+
     @RequestMapping("/delete/{id}")
     Edition delete(@PathVariable("id") String id) {
         return service.delete(id);

@@ -28,6 +28,11 @@ public class EditionOrderLogAPIController {
         return service.save(editionOrderLog);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    EditionOrderLog edit (@RequestBody EditionOrderLog editionOrderLog) {
+        return service.save(editionOrderLog);
+    }
+
     @RequestMapping("/delete/{id}")
     EditionOrderLog delete(@PathVariable("id") String id) {
         return service.delete(id);

@@ -28,6 +28,11 @@ public class ContactPersonAPIController {
         return service.save(contactPerson);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    ContactPerson edit (@RequestBody ContactPerson contactPerson) {
+        return service.save(contactPerson);
+    }
+
     @RequestMapping("/delete/{id}")
     ContactPerson delete(@PathVariable("id") String id) {
         return service.delete(id);

@@ -1,6 +1,5 @@
 package edu.lex.cursova.service.edition.impls;
 
-import edu.lex.cursova.model.Author;
 import edu.lex.cursova.repository.EditionRepository;
 import edu.lex.cursova.model.Edition;
 import edu.lex.cursova.service.edition.interfaces.IEditionService;

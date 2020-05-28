@@ -1,6 +1,5 @@
 package edu.lex.cursova.controller.api;
 
-import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.Printery;
 import edu.lex.cursova.service.printery.impls.PrinteryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,11 @@ public class PrinteryAPIController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     Printery create (@RequestBody Printery printery) {
+        return service.save(printery);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    Printery edit (@RequestBody Printery printery) {
         return service.save(printery);
     }
 

@@ -1,6 +1,5 @@
 package edu.lex.cursova.service.editionDirection.impls;
 
-import edu.lex.cursova.model.Author;
 import edu.lex.cursova.repository.EditionDirectionRepository;
 import edu.lex.cursova.model.EditionDirection;
 import edu.lex.cursova.service.editionDirection.interfaces.IEditionDirectionService;

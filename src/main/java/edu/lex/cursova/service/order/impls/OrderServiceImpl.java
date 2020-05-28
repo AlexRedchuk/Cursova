@@ -1,7 +1,5 @@
 package edu.lex.cursova.service.order.impls;
 
-import edu.lex.cursova.model.Author;
-import edu.lex.cursova.model.EditionOrderLog;
 import edu.lex.cursova.repository.OrderRepository;
 import edu.lex.cursova.model.Order;
 import edu.lex.cursova.service.order.interfaces.IOrderService;

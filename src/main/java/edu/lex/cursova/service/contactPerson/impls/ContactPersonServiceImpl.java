@@ -1,7 +1,5 @@
 package edu.lex.cursova.service.contactPerson.impls;
 
-import edu.lex.cursova.model.Author;
-import edu.lex.cursova.model.Customer;
 import edu.lex.cursova.repository.ContactPersonRepository;
 import edu.lex.cursova.model.ContactPerson;
 import edu.lex.cursova.service.contactPerson.interfaces.IContactPersonService;

@@ -1,7 +1,6 @@
 package edu.lex.cursova.service.orderProcess.impls;
 
 
-import edu.lex.cursova.model.Order;
 import edu.lex.cursova.repository.OrderProcessRepository;
 import edu.lex.cursova.model.OrderProcess;
 import edu.lex.cursova.service.orderProcess.interfaces.IOrderProcessService;

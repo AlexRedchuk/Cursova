@@ -29,6 +29,11 @@ public class AuthorAPIController {
         return service.save(author);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    Author edit (@RequestBody Author author) {
+        return service.save(author);
+    }
+
     @RequestMapping("/delete/{id}")
     Author delete(@PathVariable("id") String id) {
         return service.delete(id);

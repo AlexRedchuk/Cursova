@@ -1,6 +1,5 @@
 package edu.lex.cursova.service.author.impls;
 
-import edu.lex.cursova.model.Customer;
 import edu.lex.cursova.repository.AuthorRepository;
 import edu.lex.cursova.model.Author;
 import edu.lex.cursova.service.author.interfaces.IAuthorService;

@@ -1,7 +1,5 @@
 package edu.lex.cursova.service.productType.impls;
 
-import edu.lex.cursova.model.Edition;
-import edu.lex.cursova.model.Printery;
 import edu.lex.cursova.repository.ProductTypeRepository;
 import edu.lex.cursova.model.ProductType;
 import edu.lex.cursova.service.productType.interfaces.IProductTypeService;

@@ -1,6 +1,5 @@
 package edu.lex.cursova.controller.api;
 
-import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.ProductType;
 import edu.lex.cursova.service.productType.impls.ProductTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,11 @@ public class ProductTypeAPIController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     ProductType create (@RequestBody ProductType productType) {
+        return service.save(productType);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    ProductType edit (@RequestBody ProductType productType) {
         return service.save(productType);
     }
 

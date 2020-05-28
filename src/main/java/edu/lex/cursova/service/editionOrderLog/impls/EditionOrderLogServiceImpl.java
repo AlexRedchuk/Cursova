@@ -1,7 +1,5 @@
 package edu.lex.cursova.service.editionOrderLog.impls;
 
-import edu.lex.cursova.model.Author;
-import edu.lex.cursova.model.AuthorEditionLog;
 import edu.lex.cursova.repository.EditionOrderLogRepository;
 import edu.lex.cursova.model.EditionOrderLog;
 import edu.lex.cursova.service.editionOrderLog.interfaces.IEditionOrderLogService;

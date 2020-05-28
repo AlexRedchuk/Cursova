@@ -29,6 +29,11 @@ public class OrderProcessAPIController  {
         return service.save(orderProcess);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    OrderProcess edit (@RequestBody OrderProcess orderProcess) {
+        return service.save(orderProcess);
+    }
+
     @RequestMapping("/delete/{id}")
     OrderProcess delete(@PathVariable("id") String id) {
         return service.delete(id);

@@ -1,6 +1,5 @@
 package edu.lex.cursova.controller.api;
 
-import edu.lex.cursova.model.Author;
 import edu.lex.cursova.model.Order;
 import edu.lex.cursova.service.order.impls.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,11 @@ public class OrderAPIController  {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     Order create (@RequestBody Order order) {
+        return service.save(order);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    Order edit (@RequestBody Order order) {
         return service.save(order);
     }
 

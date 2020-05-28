@@ -1,7 +1,5 @@
 package edu.lex.cursova.service.printery.impls;
 
-import edu.lex.cursova.model.Edition;
-import edu.lex.cursova.model.Order;
 import edu.lex.cursova.repository.PrinteryRepository;
 import edu.lex.cursova.model.Printery;
 import edu.lex.cursova.service.printery.interfaces.IPrinteryService;

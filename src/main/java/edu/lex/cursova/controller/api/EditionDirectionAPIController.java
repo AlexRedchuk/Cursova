@@ -29,6 +29,11 @@ public class EditionDirectionAPIController  {
         return service.save(editionDirection);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    EditionDirection edit (@RequestBody EditionDirection editionDirection) {
+        return service.save(editionDirection);
+    }
+
     @RequestMapping("/delete/{id}")
     EditionDirection delete(@PathVariable("id") String id) {
         return service.delete(id);

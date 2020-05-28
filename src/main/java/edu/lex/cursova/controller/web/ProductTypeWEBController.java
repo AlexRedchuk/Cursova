@@ -1,10 +1,7 @@
 package edu.lex.cursova.controller.web;
 
-import edu.lex.cursova.form.EditionDirectionForm;
 import edu.lex.cursova.form.ProductTypeForm;
 import edu.lex.cursova.form.SearchForm;
-import edu.lex.cursova.model.Author;
-import edu.lex.cursova.model.EditionDirection;
 import edu.lex.cursova.model.ProductType;
 import edu.lex.cursova.service.productType.impls.ProductTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
